@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/login', [LoginController::class, 'LoginForm'])->name('form.login');
+
 Route::post('/valida/login', [LoginController::class, 'validaLogin'])->name('valida.login');
 
 Route::get("/exibir/pessoas", [PessoaController::class, 'show'])->name('exibir.pessoas');
