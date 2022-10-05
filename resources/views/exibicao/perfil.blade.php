@@ -33,7 +33,7 @@
     @foreach ($pessoa as $exibir)
       <tr>
         <td>{{$exibir->nome}}</td>
-        <td>{{$exibir->sobrenome}}</td>
+        <td>{{$exibir->id_url}}</td>
         <td>{{$exibir->email}}</td>
       </tr>
       @endforeach

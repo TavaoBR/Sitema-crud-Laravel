@@ -37,12 +37,13 @@ class LoginController extends Controller
         
           $request->session()->put('IDP', $select_pessoa->id_pessoa);
           $request->session()->put('IDURL', $select_pessoa->id_url);
+          $request->session()->put('NOME', $select_pessoa->nome);
           $request->session()->put('EMAIL', $select_pessoa->email);
           $request->session()->put('PASSWORD', $select_pessoa->senha);
 
             Pessoa::where('id_pessoa','=', $select_pessoa->id_pessoa)->update(['id_url' => Hash::make($select_pessoa->id_url.$select_pessoa->senha.$select_pessoa->email.$select_pessoa->id_pessoa)]);
             
-            return redirect()->route('exibir.pessoas');
+            return redirect()->route('exibir.perfil', ['nome' => $select_pessoa->nome, 'id_url' => $select_pessoa->id_url]);
           
         }else{
            return redirect()->back()->with('erros', 'Email ou Senha Invalidos Ou usuario não existe');
