@@ -28,7 +28,7 @@ class PessoaController extends Controller
                 'email_confirma' => 'required',
              ],[
                  'nome.required' => 'Por favor coloque nome de usuario',
-                 'sobrenome.require' => 'Por favor coloque seu sobrenome',
+                 'sobrenome.required' => 'Por favor coloque seu sobrenome',
                  'senha.required' => 'Por favor coloque senha uma senha',
                  'email.required' => 'Por favor coloque o email',
                  'email_confirma.required' => 'Por favor confirme o email',
@@ -88,7 +88,7 @@ class PessoaController extends Controller
         return view('exibicao.exibir_pessoas',['pessoas' => $pessoas]);
     }
 
-    public function exibirPessoa($nome, $id_url)
+    public function exibirPessoa($nome, $id_pessoa, $id_url)
     {
         if(session()->get('IDP') == null &&
          session()->get('IDURL') == null &&
@@ -98,7 +98,7 @@ class PessoaController extends Controller
             return redirect()->route('form.login')->with('erros', 'Por favor Logue');
          }
 
-         $pessoa = DB::select('SELECT * FROM pessoas WHERE nome = ? AND id_url = ?', [$nome, $id_url]);
+         $pessoa = DB::select('SELECT * FROM pessoas WHERE nome = ? AND id_pessoa = ? AND id_url = ?'  , [$nome, $id_pessoa, $id_url]);
          return view('exibicao.perfil',['pessoa' => $pessoa]);
          
     }

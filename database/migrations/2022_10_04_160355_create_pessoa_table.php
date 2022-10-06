@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pessoa', function (Blueprint $table) {
+        Schema::create('pessoas', function (Blueprint $table) {
             $table->integer("id_pessoa")->autoIncrement();
             $table->text("id_url");
             $table->string("nome", 120);

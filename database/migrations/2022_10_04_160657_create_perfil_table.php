@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('perfil', function (Blueprint $table) {
+        Schema::create('perfils', function (Blueprint $table) {
             $table->id("id_perfil");
             $table->integer("fk_pessoa");
-            $table->foreign("fk_pessoa")->references("id_pessoa")->on("pessoa");
+            $table->foreign("fk_pessoa")->references("id_pessoa")->on("pessoas");
             $table->string("nome_perfil", 50);
             $table->text("imagem");
             $table->timestamps();

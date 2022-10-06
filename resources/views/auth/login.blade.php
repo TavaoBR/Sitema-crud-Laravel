@@ -25,7 +25,7 @@
         <div class="row no-gutters">                
             <div class="col-lg-7=5 contact-form__wrapper p-5 order-lg-1">
                 <p>Atenção os campos que estiverem com (*) são obrigatórios</p>
-
+                
                 @if(session('erros'))
                     <div class="alert alert-danger" id="tempo">
                         {{session('erros')}}

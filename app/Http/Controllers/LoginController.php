@@ -25,6 +25,7 @@ class LoginController extends Controller
           'email.required' => 'Por favor coloque email',
           'senha.required' => 'Por favor coloque senha'
         ]);
+        
 
         $input_email = $request->input('email');
         $input_senha = $request->input('senha');
@@ -34,6 +35,8 @@ class LoginController extends Controller
         
         if(@$select_pessoa->id_pessoa != null )
         {   
+
+          Pessoa::where('id_pessoa','=', $select_pessoa->id_pessoa)->update(['id_url' => md5($select_pessoa->id_url.$select_pessoa->senha.$select_pessoa->email.$select_pessoa->id_pessoa)]);
         
           $request->session()->put('IDP', $select_pessoa->id_pessoa);
           $request->session()->put('IDURL', $select_pessoa->id_url);
@@ -41,14 +44,11 @@ class LoginController extends Controller
           $request->session()->put('EMAIL', $select_pessoa->email);
           $request->session()->put('PASSWORD', $select_pessoa->senha);
 
-            Pessoa::where('id_pessoa','=', $select_pessoa->id_pessoa)->update(['id_url' => Hash::make($select_pessoa->id_url.$select_pessoa->senha.$select_pessoa->email.$select_pessoa->id_pessoa)]);
-            
-            return redirect()->route('exibir.perfil', ['nome' => $select_pessoa->nome, 'id_url' => $select_pessoa->id_url]);
+            return redirect()->route('exibir.perfil', ['nome' => $select_pessoa->nome, 'id_pessoa' => $select_pessoa->id_pessoa, 'id_url' => md5($select_pessoa->id_url.$select_pessoa->senha.$select_pessoa->email.$select_pessoa->id_pessoa)]);
           
         }else{
            return redirect()->back()->with('erros', 'Email ou Senha Invalidos Ou usuario não existe');
         }
-
     }
     
 }
